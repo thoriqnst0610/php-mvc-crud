@@ -8,7 +8,6 @@ use perpustakaan\Config\Database;
 use perpustakaan\Repository\anggotarepository;
 use perpustakaan\domain\anggota;
 use perpustakaan\Exception\ValidationException;
-use perpustakaan\Repository\peminjamrepository;
 use perpustakaan\Service\anggotaservice;
 
 class anggotacontroller{
@@ -19,8 +18,7 @@ class anggotacontroller{
     {
         $datbase = Database::getConnection();
         $repository = new anggotarepository($datbase);
-        $peminjam = new peminjamrepository($datbase);
-        $this->service = new anggotaservice($repository, $peminjam);
+        $this->service = new anggotaservice($repository);
     }
 
     public function menampilkan()
