@@ -6,18 +6,15 @@ use Exception;
 use perpustakaan\Exception\ValidationException;
 use perpustakaan\domain\anggota;
 use perpustakaan\Repository\anggotarepository;
-use perpustakaan\Repository\peminjamrepository;
 
 class anggotaservice{
     
     private anggotarepository $repository;
-    private peminjamrepository $peminjam;
 
-    public function __construct(anggotarepository $repository, peminjamrepository $peminjam)
+    public function __construct(anggotarepository $repository)
     {
 
         $this->repository = $repository;
-        $this->peminjam = $peminjam;
         
     }
 
@@ -83,13 +80,6 @@ class anggotaservice{
 
     private function validatemenghapus(string $id_anggota):void
     {
-        $anggota = $this->peminjam->ambilanggota($id_anggota);
-        $anggota = $anggota->semua;
-
-        if(!empty($anggota)){
-
-            throw new ValidationException("maaf, anggota ini lagi meminjam buku");
-        }
 
         if($id_anggota == ""){
 
